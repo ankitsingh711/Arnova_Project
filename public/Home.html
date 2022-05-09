@@ -27,27 +27,32 @@
     }
 </style>
 <script>
-    const startingMinutes = 10;
-    let time = startingMinutes*60;
+      var minutes = 9;
+    var seconds = 60;
 
-    const countdownEl = document.getElementById('timer')
+    setInterval(function(){
+        if(minutes == 1 && seconds == 1){
+            document.getElementById('timer').innerHTML = '00:00'
+        }else{
+            seconds--;
+            if( seconds == 0){
+                minutes--;
+                seconds = 60;
 
-    setInterval(updateCountdown, 1000)
+                if(minutes == 0){
+                    minutes = minutes;
+                }
+            }
 
-    function updateCountdown(){
-        const minutes = Math.floor(time / 60);
-        let seconds = time % 60;
+            document.getElementById('timer').innerHTML = minutes + ":" + seconds
+        }
+    }, 1000)
 
-        seconds = seconds < 10 ? '0' + seconds : seconds;
-
-        countdownEl.innerHTML = `${minutes}:${seconds}`
-        time--;
-    }
-
-    function displayGreeting(event) {
-    event.preventDefault();
-    let usrname = document.getElementById('typeEmailX').value;
-    document.getElementById('outputDiv').innerHTML = 'Hello ' + typeEmailX + ', Welcome to Livewell page' + '<br> ' + 'You are officially a livewell member ' + typeEmailX + '!';
+    
+function displayGreeting(event) {
+event.preventDefault();
+let usrname = document.getElementById('usrname').value;
+document.getElementById('outputDiv').innerHTML = 'Hello ' + usrname + ', Welcome to Livewell page' + '<br> ' + 'You are officially a livewell member ' + usrname + '!';
 }
 
 </script>
@@ -88,11 +93,11 @@
             </form>
             </div>
         </div>
-    </nav>
-    <div class="float-left" onclick="displayGreeting()" id="outputDiv"></div>
-    <div id="timer" class="my-5">10:00</div>
+    </nav><br><br><br>
+    <div id="timer" style="margin-left:550px;">10:00</div>
     <a href="index.html"><button type="button" class="btn btn-primary float-end mx-5 my-3" id="myButton">Log Out</button></a>
     <br><br><br><br>
+    <div id="outputDiv" style="position:absolute;"></div>
     <div class="input-group">
         <span class="input-group-text">Write Your Message</span>
         <textarea class="form-control" aria-label="With textarea"></textarea>
